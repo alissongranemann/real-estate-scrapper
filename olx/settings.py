@@ -11,7 +11,7 @@
 
 BOT_NAME = 'olx'
 
-SPIDER_MODULES = ['olx.spiders']
+SPIDER_MODULES = ['olx.spiders.sell']
 NEWSPIDER_MODULE = 'olx.spiders'
 
 
