@@ -42,4 +42,4 @@ class SellPropertiesSpider(Spider):
 
         next_page = listing.css("li.next a::attr(href)").get()
         if next_page is not None:
-            yield Request(next_page, callback=self.parse)
+            yield Request(next_page, callback=self.parse_properties_list)
