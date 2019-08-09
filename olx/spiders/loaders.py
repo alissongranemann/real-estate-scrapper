@@ -13,12 +13,9 @@ def get_price(raw_price):
     return locale.atof(raw_numbers)
 
 
-def remove_inner_spaces(detail):
-    return "".join(detail.split())
-
 
 def get_area(raw_area):
-    regex = re.compile(r".*\|([0-9]+)m²\|.*")
+    regex = re.compile(r"([0-9]+) m²")
     match = regex.match(raw_area)
     if match:
         return int(match.group(1))
@@ -27,5 +24,6 @@ def get_area(raw_area):
 class PropertyLoader(ItemLoader):
 
     default_output_processor = TakeFirst()
-    area_out = Compose(TakeFirst(), str.strip, remove_inner_spaces, get_area)
+    area_out = Compose(TakeFirst(), str.strip, get_area)
     price_out = Compose(TakeFirst(), str.strip, get_price)
+    cep_out = Compose(TakeFirst(), str.strip)
