@@ -11,7 +11,7 @@
 
 BOT_NAME = 'olx'
 
-SPIDER_MODULES = ['olx.spiders.sell']
+SPIDER_MODULES = ['olx.spiders.properties']
 NEWSPIDER_MODULE = 'olx.spiders'
 
 
@@ -64,9 +64,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'olx.pipelines.OlxPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'olx.spiders.pipelines.EmptySellPropertyPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
