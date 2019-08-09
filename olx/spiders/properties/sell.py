@@ -16,12 +16,12 @@ class SellPropertiesSpider(Spider):
         self.start_urls = [f"https://{state}.olx.com.br/imoveis/venda"]
 
     def parse(self, response):
-        macro_regions = response.css("div.linkshelf-tabs-content ul.list li.item p.text")
+        macro_regions = response.css("div.linkshelf-tabs-content ul.list li.item")
         for region in macro_regions:
-            url = region.css("a::attr(href)").get()
-            yield response.follow(url=url, callback=self.pase_micro_regions)
+            url = region.css("p.text a::attr(href)").get()
+            yield response.follow(url=url, callback=self.parse_micro_regions)
 
-    def pase_micro_regions(self, response):
+    def parse_micro_regions(self, response):
         micro_regions = response.css(
             "div.linkshelf-tabs-content div.linkshelf-zone ul.list li.item a.link"
         )
@@ -31,7 +31,7 @@ class SellPropertiesSpider(Spider):
 
     def parse_properties_list(self, response):
         listing = response.css("div.section_listing")
-        announcements_items = listing.css("div.section_OLXad-list li.item")
+        announcements_items = listing.css("div.section_OLXad-list li")
 
         for item in announcements_items:
             loader = PropertyLoader(item=Property(), selector=item)
