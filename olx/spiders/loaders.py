@@ -13,7 +13,6 @@ def get_price(raw_price):
     return locale.atof(raw_numbers)
 
 
-
 def get_area(raw_area):
     regex = re.compile(r"([0-9]+) m²")
     match = regex.match(raw_area)
@@ -23,7 +22,6 @@ def get_area(raw_area):
 
 class PropertyLoader(ItemLoader):
 
-    default_output_processor = TakeFirst()
+    default_output_processor = Compose(TakeFirst(), str.strip)
     area_out = Compose(TakeFirst(), str.strip, get_area)
     price_out = Compose(TakeFirst(), str.strip, get_price)
-    cep_out = Compose(TakeFirst(), str.strip)
