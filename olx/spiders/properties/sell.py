@@ -37,19 +37,20 @@ class SellPropertiesSpider(Spider):
             url = item.css("a::attr(href)").get()
             yield response.follow(url=url, callback=self.parse_property)
 
-        next_page = listing.css("li.next a::attr(href)").get()
-        if next_page is not None:
-            yield Request(next_page, callback=self.parse_properties_list)
+        # next_page = listing.css("li.next a::attr(href)").get()
+        # if next_page is not None:
+        #     yield Request(next_page, callback=self.parse_properties_list)
 
     def parse_property(self, response):
         loader = PropertyLoader(item=Property(), response=response)
-        loader.add_css("id", "div.OLXad-id strong.description::text")
+        # loader.add_css("id", "div.OLXad-id strong.description::text")
         loader.add_xpath(
             "area",
             "//div[contains(@class, 'OLXad-detail')]//ul//li[@class='item']/p/strong[contains(text(), 'm²')]/text()",
         )
         loader.add_css("price", "h3.price span.actual-price::text")
-        loader.add_xpath("city", "//div[contains(@class, 'OLXad-location')]//ul/li[1]//strong/text()")
-        loader.add_xpath("cep", "//div[contains(@class, 'OLXad-location')]//ul/li[2]//strong/text()")
-        loader.add_xpath("neighbourhood", "//div[contains(@class, 'OLXad-location')]//ul/li[3]//strong/text()")
+        loader.add_xpath(
+            "postal_code",
+            "//div[contains(@class, 'OLXad-location')]//ul/li[2]//strong/text()",
+        )
         yield loader.load_item()
