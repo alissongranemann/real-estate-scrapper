@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+from dotenv import load_dotenv
 
 # Scrapy settings for olx project
 #
@@ -8,6 +10,11 @@
 #     https://doc.scrapy.org/en/latest/topics/settings.html
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+dotenv_path = os.path.join(BASE_DIR, ".env")
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
 
 BOT_NAME = "olx"
 
@@ -86,3 +93,5 @@ ITEM_PIPELINES = {"olx.spiders.pipelines.SellPropertyPipeline": 300}
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+REAL_STATE_API = os.environ.get("REAL_STATE_API")
