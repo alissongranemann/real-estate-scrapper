@@ -37,9 +37,9 @@ class SellPropertiesSpider(Spider):
             url = item.css("a::attr(href)").get()
             yield response.follow(url=url, callback=self.parse_property)
 
-        # next_page = listing.css("li.next a::attr(href)").get()
-        # if next_page is not None:
-        #     yield Request(next_page, callback=self.parse_properties_list)
+        next_page = listing.css("li.next a::attr(href)").get()
+        if next_page is not None:
+            yield Request(next_page, callback=self.parse_properties_list)
 
     def parse_property(self, response):
         loader = PropertyLoader(item=Property(), response=response)
@@ -53,4 +53,5 @@ class SellPropertiesSpider(Spider):
             "postal_code",
             "//div[contains(@class, 'OLXad-location')]//ul/li[2]//strong/text()",
         )
+        loader.add_value("url", response.url)
         yield loader.load_item()

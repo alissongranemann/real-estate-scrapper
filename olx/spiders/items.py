@@ -6,3 +6,4 @@ class Property(scrapy.Item):
     price = scrapy.Field()
     area = scrapy.Field()
     postal_code = scrapy.Field()
+    url = scrapy.Field()
