@@ -17,6 +17,7 @@ cssselect==1.0.3
 entrypoints==0.3
 flake8==3.7.8
 gunicorn==19.9.0
+herokuify-scrapyd==1.0
 hyperlink==19.0.0
 idna==2.8
 incremental==17.5.0
@@ -45,7 +46,9 @@ python-editor==1.0.4
 pytz==2019.2
 queuelib==1.5.0
 requests==2.22.0
+Scrapy==1.7.3
 Scrapy3==1.0.1
+scrapyd==1.2.1
 service-identity==18.1.0
 six==1.12.0
 soupsieve==1.9.2

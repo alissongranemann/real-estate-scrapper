@@ -95,3 +95,4 @@ ITEM_PIPELINES = {"olx.spiders.pipelines.SellPropertyPipeline": 300}
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 REAL_STATE_API = os.environ.get("REAL_STATE_API")
+LOG_LEVEL = os.environ.get("LOG_LEVEL")
