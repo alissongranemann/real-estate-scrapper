@@ -1,7 +1,5 @@
 from scrapy import Spider, Request
-from scrapy.loader import ItemLoader
 
-from urllib.parse import urlparse
 from olx.spiders.items import Property
 from olx.spiders.loaders import PropertyLoader
 
@@ -46,12 +44,12 @@ class SellPropertiesSpider(Spider):
         # loader.add_css("id", "div.OLXad-id strong.description::text")
         loader.add_xpath(
             "area",
-            "//div[contains(@class, 'OLXad-detail')]//ul//li[@class='item']/p/strong[contains(text(), 'm²')]/text()",
+            '//div[@data-testid="ad-properties"]//dt[contains(text(), "Área")]/following-sibling::dd/text()',  # noqa: E501
         )
-        loader.add_css("price", "h3.price span.actual-price::text")
+        loader.add_xpath("price", '//h2[contains(text(), "R$")]/text()')
         loader.add_xpath(
             "postal_code",
-            "//div[contains(@class, 'OLXad-location')]//ul/li[2]//strong/text()",
+            '//div[@data-testid="ad-properties"]//dt[contains(text(), "CEP")]/following-sibling::dd/text()',  # noqa: E501
         )
         loader.add_value("url", response.url)
         yield loader.load_item()

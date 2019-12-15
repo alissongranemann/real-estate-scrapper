@@ -1,7 +1,5 @@
 import requests
-import os
 from scrapy.exceptions import DropItem
-from scrapy.utils.project import get_project_settings
 
 
 class SellPropertyPipeline(object):
@@ -9,6 +7,7 @@ class SellPropertyPipeline(object):
         self.API_URL = spider.settings.get("REAL_ESTATE_API")
 
     def process_item(self, item, spider):
+        print(f"process_item: {item}")
         if not item or item.get("area") is None or item.get("price") is None:
             raise DropItem(f"Invalid or empty item found: {item}")
 

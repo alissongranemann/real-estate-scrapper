@@ -26,11 +26,17 @@ To add git-hooks on your enviroment, so you can run `black` and `flake8` on your
 
 Also, you need to configurate the enviroment variables accordingly. Create `env` file in the project's root folder and set the variables following the `.env.example`.
 
+## Development
+
 In order to have the poetry packages in a local virtual environment (in the project root directory), run:
 
 ```bash
 poetry install
 ```
+
+To test xpaths while building the scrapper (or changing one), you can use the http://xpather.com/.
+
+The purpose of `runner.py` file is for debug. You can run it on your IDE as a normal python file.
 
 ## Run
 
