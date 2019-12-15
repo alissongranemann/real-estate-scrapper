@@ -6,7 +6,7 @@ from scrapy.utils.project import get_project_settings
 
 class SellPropertyPipeline(object):
     def open_spider(self, spider):
-        self.API_URL = spider.settings.get("REAL_STATE_API")
+        self.API_URL = spider.settings.get("REAL_ESTATE_API")
 
     def process_item(self, item, spider):
         if not item or item.get("area") is None or item.get("price") is None:

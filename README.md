@@ -1,4 +1,4 @@
-# Real State Scrapper
+# Real Estate Scrapper
 
 If you don't have 'pt_BR' locale installed, follow the steps:
 
